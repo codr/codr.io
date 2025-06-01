@@ -1,0 +1,80 @@
+<header class="header">
+  <div class="header-content">
+    <div class="logo">
+      <a href="/">codr.io</a>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav a:hover {
+    color: #000;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .header {
+      background: #111;
+      border-bottom-color: #222;
+    }
+
+    .logo a {
+      color: #fff;
+    }
+
+    .nav a {
+      color: #999;
+    }
+
+    .nav a:hover {
+      color: #fff;
+    }
+  }
+</style> 
