@@ -5,41 +5,41 @@ import Footer from '../components/Footer.astro';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>codr.io</title>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>codr.io</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		min-height: 100vh;
-		font-family: system-ui, -apple-system, sans-serif;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
 
-	body {
-		display: flex;
-		flex-direction: column;
-	}
+  body {
+    display: flex;
+    flex-direction: column;
+  }
 
-	main {
-		flex: 1;
-		padding-top: 4rem; /* Space for fixed header */
-		width: 100%;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
+  main {
+    flex: 1;
+    padding-top: 4rem; /* Space for fixed header */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 </style>
