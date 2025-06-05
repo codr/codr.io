@@ -43,8 +43,6 @@ jobs:
         uses: actions/configure-pages@v4
         with:
           static_site_generator: astro
-          custom_domain: codr.io
-          enable_ssl: true
 
       - name: Install, build, and upload your site
         uses: withastro/action@v3
