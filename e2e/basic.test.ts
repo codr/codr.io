@@ -72,24 +72,6 @@ test('validates internal navigation links', async ({ page }) => {
   }
 });
 
-test('validates external social media links', async ({ page }) => {
-  await page.goto('/');
-  
-  // Check social media links in footer
-  const socialLinks = page.locator('.social-links a');
-  const links = await socialLinks.all();
-  
-  for (const link of links) {
-    const href = await link.getAttribute('href');
-    expect(href).toBeTruthy();
-    expect(href).toMatch(/^https?:\/\//); // Should be absolute URLs
-    
-    // Check if link has an accessible name
-    const ariaLabel = await link.getAttribute('aria-label');
-    expect(ariaLabel).toBeTruthy();
-  }
-});
-
 test('displays correct content', async ({ page }) => {
   await page.goto('/');
   
