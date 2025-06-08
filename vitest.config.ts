@@ -7,5 +7,8 @@ export default getViteConfig({
     coverage: {
       exclude: ['node_modules', 'dist', 'build', 'public', 'src/assets', '*.config.*', 'e2e', '.astro'],
     },
+    environment: 'happy-dom',
+    globals: true,
+    setupFiles: ['./vitest.setup.ts'],
   },
 }); 
