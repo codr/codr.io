@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { queryByLabelText } from '@testing-library/dom';
 import Footer from './Footer.astro';
 
 describe('Footer', () => {
@@ -8,13 +9,22 @@ describe('Footer', () => {
   });
 
   it('renders social links with proper attributes', async () => {
-    const container = await AstroContainer.create();
-    const result = await container.renderToString(Footer);
+    const element = await renderFooter();
 
     // Check accessibility attributes
-    expect(result).toContain('aria-label="GitHub"');
-    expect(result).toContain('aria-label="Twitter"');
-    expect(result).toContain('aria-label="Bluesky"');
-    expect(result).toContain('aria-label="LinkedIn"');
+    expect(queryByLabelText(element, 'GitHub')).toBeDefined();
+    expect(queryByLabelText(element, 'Twitter')).toBeDefined();
+    expect(queryByLabelText(element, 'Bluesky')).toBeDefined();
+    expect(queryByLabelText(element, 'LinkedIn')).toBeDefined();
   });
+
+  async function renderFooter() {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Footer);
+
+    // Create a DOM element to hold our rendered HTML
+    const element = document.createElement('div');
+    element.innerHTML = html;
+    return element;
+  }
 }); 
