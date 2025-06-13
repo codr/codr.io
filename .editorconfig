@@ -14,4 +14,7 @@ trim_trailing_whitespace = true
 
 # Markdown files
 [*.md]
-trim_trailing_whitespace = false 
+trim_trailing_whitespace = false
+
+[*.{js,jsx,ts,tsx,astro}]
+quote_type = single
