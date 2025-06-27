@@ -9,13 +9,21 @@ import { FEATURES } from '../config/features';
     </div>
     <nav class="nav">
       <ul>
-        <li><a href="/">Home</a></li>
-        {FEATURES.SHOW_HEADER_LINKS && (
-          <>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/blog">Blog</a></li>
-          </>
-        )}
+        {
+          FEATURES.SHOW_HEADER_LINKS && (
+            <>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/projects">Projects</a>
+              </li>
+              <li>
+                <a href="/blog">Blog</a>
+              </li>
+            </>
+          )
+        }
       </ul>
     </nav>
   </div>
@@ -85,4 +93,4 @@ import { FEATURES } from '../config/features';
       color: #fff;
     }
   }
-</style> 
+</style>
