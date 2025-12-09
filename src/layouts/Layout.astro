@@ -6,6 +6,19 @@ import Footer from '../components/Footer.astro';
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKW4B53SMN"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-KKW4B53SMN');
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -27,7 +40,10 @@ import Footer from '../components/Footer.astro';
     margin: 0;
     width: 100%;
     min-height: 100vh;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
   }
 
   body {
