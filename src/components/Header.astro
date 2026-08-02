@@ -13,21 +13,19 @@ import { FEATURES } from '@/config/features';
     </div>
     <nav class="nav">
       <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
         {
           FEATURES.SHOW_HEADER_LINKS && (
-            <>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/projects">Projects</a>
-              </li>
-              <li>
-                <a href="/blog">Blog</a>
-              </li>
-            </>
+            <li>
+              <a href="/projects">Projects</a>
+            </li>
           )
         }
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -67,9 +65,9 @@ import { FEATURES } from '@/config/features';
   }
 
   .header-content {
-    max-width: 1200px;
+    max-width: 720px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
