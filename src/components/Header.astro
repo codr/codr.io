@@ -6,8 +6,8 @@ import { FEATURES } from '@/config/features';
   <div class="header-content">
     <div class="logo">
       <a href="/">
-        <span class="logo-accent">&lt;</span>codr<span
-          class="logo-accent">/&gt;</span
+        <span class="logo-accent">&lt;</span>codr<span class="logo-accent"
+          >/&gt;</span
         >
       </a>
     </div>
@@ -35,12 +35,35 @@ import { FEATURES } from '@/config/features';
 
 <style>
   .header {
+    position: sticky;
+    container-type: scroll-state;
     width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #eaeaea;
-    position: fixed;
     top: 0;
     z-index: 1000;
+  }
+
+  .header::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+
+    transition: background-color 0.2s ease;
+  }
+
+  @container scroll-state(stuck: top) {
+    .header::before {
+      background-color: #fff;
+      border-bottom: 1px solid hsl(220 15% 86% / 0.2);
+    }
+  }
+
+  @supports not (container-type: scroll-state) {
+    .header::before {
+      background-color: #fff;
+      border-bottom: 1px solid hsl(220 15% 86% / 0.2);
+    }
   }
 
   .header-content {
