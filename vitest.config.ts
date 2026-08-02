@@ -26,6 +26,7 @@ export default getViteConfig({
       ],
     },
     environment: 'happy-dom',
+    testTransformMode: { ssr: ['**'] },
     globals: true,
   },
 });
