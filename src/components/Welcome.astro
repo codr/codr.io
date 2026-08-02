@@ -2,17 +2,24 @@
 import background from '../assets/background.svg';
 ---
 
-<div id="container">
-  <img id="background" src={background.src} alt="" fetchpriority="high" />
-  <main>
-    <section id="hero">
-      <h1>Hi, I'm Cody 👋</h1>
-      <p class="intro">
-        I'm a software engineer passionate about building tools that make
-        developers' lives easier.
-      </p>
-    </section>
-  </main>
+<div id="container" class="flex flex-col flex-1">
+  <section
+    id="hero"
+    class="relative flex flex-1 items-center justify-center hero-gradient section-glow overflow-hidden"
+  >
+    <div>
+      <span
+        class="inline-block px-4 py-2 mb-6 text-sm font-mono text-primary bg-primary/10 rounded-full border border-primary/20"
+      >
+        Software Engineer
+      </span>
+    </div>
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold">Hi, I'm Cody</h1>
+    <p class="intro">
+      I'm a software engineer passionate about building tools, platforms, and
+      frontend systems that increase leverage across entire teams.
+    </p>
+  </section>
 </div>
 
 <style>
@@ -27,15 +34,10 @@ import background from '../assets/background.svg';
   }
 
   #container {
-    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
-      Arial, sans-serif;
+    font-family:
+      Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial,
+      sans-serif;
     height: 100%;
-  }
-
-  main {
-    height: 100%;
-    display: flex;
-    justify-content: center;
   }
 
   #hero {
@@ -44,20 +46,8 @@ import background from '../assets/background.svg';
     flex-direction: column;
     justify-content: center;
     padding: 2rem;
-    max-width: 800px;
     text-align: center;
     width: 100%;
-  }
-
-  h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0;
-    background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-align: center;
   }
 
   .intro {
@@ -66,6 +56,7 @@ import background from '../assets/background.svg';
     color: #4b5563;
     margin: 1.5rem 0;
     max-width: 600px;
+    text-wrap: balance;
   }
 
   /* Dark mode support */
@@ -77,10 +68,6 @@ import background from '../assets/background.svg';
 
   /* Responsive design */
   @media screen and (max-width: 768px) {
-    h1 {
-      font-size: 2.5rem;
-    }
-
     .intro {
       font-size: 1.1rem;
     }
