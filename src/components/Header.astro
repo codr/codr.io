@@ -4,8 +4,14 @@ import { FEATURES } from '../config/features';
 
 <header class="header">
   <div class="header-content">
-    <div class="logo">
-      <a href="/">codr.io</a>
+    <div
+      class="text-xl font-semibold text-foreground hover:text-primary transition-colors"
+    >
+      <a href="/">
+        <span class="font-mono text-primary">&lt;</span>codr<span
+          class="font-mono text-primary">/&gt;</span
+        >
+      </a>
     </div>
     <nav class="nav">
       <ul>
@@ -48,13 +54,6 @@ import { FEATURES } from '../config/features';
     align-items: center;
   }
 
-  .logo a {
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-decoration: none;
-    color: #000;
-  }
-
   .nav ul {
     display: flex;
     gap: 2rem;
@@ -79,10 +78,6 @@ import { FEATURES } from '../config/features';
     .header {
       background: #111;
       border-bottom-color: #222;
-    }
-
-    .logo a {
-      color: #fff;
     }
 
     .nav a {
