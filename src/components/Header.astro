@@ -4,12 +4,10 @@ import { FEATURES } from '@/config/features';
 
 <header class="header">
   <div class="header-content">
-    <div
-      class="text-xl font-semibold text-foreground hover:text-primary transition-colors"
-    >
+    <div class="logo">
       <a href="/">
-        <span class="font-mono text-primary">&lt;</span>codr<span
-          class="font-mono text-primary">/&gt;</span
+        <span class="logo-accent">&lt;</span>codr<span
+          class="logo-accent">/&gt;</span
         >
       </a>
     </div>
@@ -73,11 +71,40 @@ import { FEATURES } from '@/config/features';
     color: #000;
   }
 
+  .logo a {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.2s ease;
+  }
+
+  .logo a:hover {
+    color: #3245ff;
+  }
+
+  .logo-accent {
+    font-family: ui-monospace, monospace;
+    color: #3245ff;
+  }
+
   /* Dark mode support */
   @media (prefers-color-scheme: dark) {
     .header {
       background: #111;
       border-bottom-color: #222;
+    }
+
+    .logo a {
+      color: #fff;
+    }
+
+    .logo a:hover {
+      color: #818cf8;
+    }
+
+    .logo-accent {
+      color: #818cf8;
     }
 
     .nav a {

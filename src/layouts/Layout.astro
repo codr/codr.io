@@ -27,7 +27,7 @@ import Footer from '@/components/Footer.astro';
   </head>
   <body>
     <Header />
-    <main class="flex flex-col">
+    <main>
       <slot />
     </main>
     <Footer />
@@ -52,8 +52,10 @@ import Footer from '@/components/Footer.astro';
   }
 
   main {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-    padding-top: 4rem; /* Space for fixed header */
+    padding-top: 4rem;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
