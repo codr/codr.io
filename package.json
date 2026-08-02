@@ -16,7 +16,7 @@
     "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
-    "astro": "^5.8.1"
+    "astro": "^7.1.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.42.1",
