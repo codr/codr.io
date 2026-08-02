@@ -1,0 +1,193 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<Layout title={post.data.title}>
+  <article>
+    <header>
+      <a href="/" class="back-link">← codr.io</a>
+      <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+      <h1>{post.data.title}</h1>
+      {post.data.description && <p class="description">{post.data.description}</p>}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    font-family:
+      Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial,
+      sans-serif;
+  }
+
+  header {
+    margin-bottom: 3rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-family: ui-monospace, monospace;
+    color: #3245ff;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  time {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-family: ui-monospace, monospace;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+  }
+
+  .description {
+    font-size: 1.125rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .prose {
+    line-height: 1.75;
+    color: #1f2937;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2.5rem 0 1rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+  }
+
+  .prose :global(p) {
+    margin: 1.25rem 0;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 1.25rem 0;
+    padding-left: 1.75rem;
+  }
+
+  .prose :global(li) {
+    margin: 0.5rem 0;
+  }
+
+  .prose :global(a) {
+    color: #3245ff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(code) {
+    font-family: ui-monospace, monospace;
+    font-size: 0.875em;
+    background: #f3f4f6;
+    border-radius: 4px;
+    padding: 0.125em 0.375em;
+  }
+
+  .prose :global(pre) {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    padding: 0;
+    font-size: 0.875rem;
+    color: inherit;
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2.5rem 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    h1 {
+      color: #f9fafb;
+    }
+
+    .back-link {
+      color: #818cf8;
+    }
+
+    time {
+      color: #9ca3af;
+    }
+
+    .description {
+      color: #9ca3af;
+    }
+
+    .prose {
+      color: #d1d5db;
+    }
+
+    .prose :global(h2),
+    .prose :global(h3) {
+      color: #f9fafb;
+    }
+
+    .prose :global(a) {
+      color: #818cf8;
+    }
+
+    .prose :global(code) {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    .prose :global(hr) {
+      border-color: #374151;
+    }
+  }
+</style>

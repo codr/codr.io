@@ -1,3 +1,9 @@
+---
+title: Building a Simple Plant Grow Cam from Spare Streaming Gear
+date: 2025-01-20
+description: How I built a DIY plant grow cam using Raspberry Pi, bash scripts, cron, and spare streaming hardware.
+---
+
 # Building a Simple Plant Grow Cam from Spare Streaming Gear
 
 Like a lot of engineers, I’ve accumulated a small graveyard of old hardware: streaming gear, Raspberry Pi boards, and cables I can’t bring myself to throw away. I recently decided to put some of it to use and built a DIY plant grow cam. It’s not fancy, but it’s effective.

@@ -1,6 +1,15 @@
 ---
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const pageTitle = title ? `${title} — codr.io` : 'codr.io';
 ---
 
 <!doctype html>
@@ -23,7 +32,7 @@ import Footer from '@/components/Footer.astro';
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>codr.io</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
     <Header />
@@ -49,6 +58,11 @@ import Footer from '@/components/Footer.astro';
   body {
     display: flex;
     flex-direction: column;
+
+    background-size: 60px 60px;
+    background-image:
+      linear-gradient(hsl(220 15% 86% / 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(220 15% 86% / 0.2) 1px, transparent 1px);
   }
 
   main {
