@@ -4,7 +4,6 @@ import { queryByLabelText } from '@testing-library/dom';
 import Header from './Header.astro';
 
 describe('Header', () => {
-
   it('can be imported', () => {
     expect(Header).toBeDefined();
   });
@@ -30,12 +29,12 @@ describe('Header', () => {
     // Mock the FEATURES object
     vi.mock('../config/features', () => ({
       FEATURES: {
-        SHOW_HEADER_LINKS: true
-      }
+        SHOW_HEADER_LINKS: true,
+      },
     }));
 
     const element = await renderHeader();
-    
+
     // Check that links exist using DOM queries
     expect(queryByLabelText(element, 'Projects')).toBeDefined();
     expect(queryByLabelText(element, 'Blog')).toBeDefined();
@@ -53,4 +52,4 @@ describe('Header', () => {
     element.innerHTML = html;
     return element;
   }
-}); 
+});

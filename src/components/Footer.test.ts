@@ -27,4 +27,4 @@ describe('Footer', () => {
     element.innerHTML = html;
     return element;
   }
-}); 
+});
