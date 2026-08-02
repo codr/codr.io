@@ -45,7 +45,7 @@ jobs:
           static_site_generator: astro
 
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
+        uses: withastro/action@v6
 
   deploy:
     needs: build
