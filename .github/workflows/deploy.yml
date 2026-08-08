@@ -47,9 +47,6 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
-        with:
-          static_site_generator: astro
-          generator_config_file: astro.config.mjs
 
       - name: Install, build, and upload your site
         uses: withastro/action@v6
