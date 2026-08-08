@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 import { getViteConfig } from 'astro/config';
 
 export default getViteConfig({
@@ -25,8 +25,7 @@ export default getViteConfig({
         '.astro',
       ],
     },
-    environment: 'happy-dom',
-    testTransformMode: { ssr: ['**'] },
+    environment: './vitest-environment-astro.ts',
     globals: true,
   },
 });

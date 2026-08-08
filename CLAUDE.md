@@ -10,6 +10,7 @@ npm run build        # Build for production
 npm run preview      # Preview production build (used by E2E tests)
 npm run lint         # Lint with oxlint
 npm run lint:fix     # Lint with oxlint, applying auto-fixes
+npm run typecheck    # Type-check with tsc (no emit)
 npm test             # Run unit tests once
 npm run test:watch   # Unit tests in watch mode
 npm run test:e2e     # Run Playwright E2E tests (requires built site)
