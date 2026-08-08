@@ -2,7 +2,12 @@
   "cSpell.words": [
     "Elgato",
     "fswebcam",
+    "oxlint",
     "timelapse",
     "withastro"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
+  "eslint.enable": false
 }

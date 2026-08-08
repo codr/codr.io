@@ -8,6 +8,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev          # Start dev server at http://localhost:4321
 npm run build        # Build for production
 npm run preview      # Preview production build (used by E2E tests)
+npm run lint         # Lint with oxlint
+npm run lint:fix     # Lint with oxlint, applying auto-fixes
 npm test             # Run unit tests once
 npm run test:watch   # Unit tests in watch mode
 npm run test:e2e     # Run Playwright E2E tests (requires built site)
@@ -20,9 +22,11 @@ npx vitest run src/components/Header.test.ts
 
 ## Architecture
 
-This is a personal portfolio site built with **Astro 5** and **Tailwind CSS 4** (via Vite plugin, not PostCSS). Deployed automatically to GitHub Pages on push to `main` — CI runs unit tests before build.
+This is a personal portfolio site built with **Astro 5** and **Tailwind CSS 4** (via Vite plugin, not PostCSS). Deployed automatically to GitHub Pages on push to `main` — CI runs lint and unit tests before build.
 
 **Styling approach:** Tailwind utility classes and component-scoped `<style>` blocks coexist throughout `.astro` files. Dark mode uses `@media (prefers-color-scheme: dark)`.
+
+**Linting:** [oxlint](https://oxc.rs) lints `.ts`/`.js`/`.mjs` files and the frontmatter script of `.astro` files (config in `.oxlintrc.json`). It does not lint Astro templates themselves. Run `npm run lint`.
 
 **Feature flags:** `src/config/features.ts` exports a `FEATURES` const used at build time. Currently controls `SHOW_HEADER_LINKS` (nav links for Projects/Blog — disabled by default). Toggle flags here to expose in-progress sections.
 
