@@ -54,29 +54,14 @@ import LinkedIn from '@/assets/linkedin.svg';
   }
 
   .social-links a {
-    color: #666;
+    color: var(--color-text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
     line-height: 0;
   }
 
   .social-links a:hover {
-    color: #000;
-  }
-
-  /* Dark mode support */
-  @media (prefers-color-scheme: dark) {
-    .footer {
-      background: transparent;
-    }
-
-    .social-links a {
-      color: #999;
-    }
-
-    .social-links a:hover {
-      color: #fff;
-    }
+    color: var(--color-text);
   }
 
   /* Responsive adjustments */

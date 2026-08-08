@@ -57,9 +57,9 @@
     margin-bottom: 1.5rem;
     font-size: 0.875rem;
     font-family: ui-monospace, monospace;
-    color: #3245ff;
-    background: rgb(50 69 255 / 0.1);
-    border: 1px solid rgb(50 69 255 / 0.2);
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-soft-border);
     border-radius: 9999px;
   }
 
@@ -68,27 +68,16 @@
     font-weight: 700;
     line-height: 1;
     margin: 0;
+    color: var(--color-text);
   }
 
   .intro {
     font-size: 1.25rem;
     line-height: 1.6;
-    color: #4b5563;
+    color: var(--color-text-secondary);
     margin: 1.5rem 0;
     max-width: 600px;
     text-wrap: balance;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .badge {
-      color: #818cf8;
-      background: rgb(129 140 248 / 0.1);
-      border-color: rgb(129 140 248 / 0.2);
-    }
-
-    .intro {
-      color: #9ca3af;
-    }
   }
 
   @media (min-width: 48rem) {

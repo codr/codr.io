@@ -56,7 +56,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
     display: inline-block;
     font-size: 0.875rem;
     font-family: ui-monospace, monospace;
-    color: #3245ff;
+    color: var(--color-accent);
     text-decoration: none;
     margin-bottom: 1.5rem;
   }
@@ -68,7 +68,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   time {
     display: block;
     font-size: 0.875rem;
-    color: #6b7280;
+    color: var(--color-text-muted);
     font-family: ui-monospace, monospace;
     margin-bottom: 0.75rem;
   }
@@ -78,18 +78,19 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
     font-weight: 700;
     line-height: 1.2;
     margin: 0 0 1rem;
+    color: var(--color-text);
   }
 
   .description {
     font-size: 1.125rem;
-    color: #4b5563;
+    color: var(--color-text-secondary);
     line-height: 1.6;
     margin: 0;
   }
 
   .prose {
     line-height: 1.75;
-    color: #1f2937;
+    color: var(--color-text);
   }
 
   .prose :global(h2) {
@@ -119,7 +120,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   }
 
   .prose :global(a) {
-    color: #3245ff;
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -127,14 +128,14 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   .prose :global(code) {
     font-family: ui-monospace, monospace;
     font-size: 0.875em;
-    background: #f3f4f6;
+    background: var(--color-code-bg);
     border-radius: 4px;
     padding: 0.125em 0.375em;
   }
 
   .prose :global(pre) {
-    background: #1e293b;
-    color: #e2e8f0;
+    background: var(--color-pre-bg);
+    color: var(--color-pre-text);
     border-radius: 8px;
     padding: 1.25rem 1.5rem;
     overflow-x: auto;
@@ -150,47 +151,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
 
   .prose :global(hr) {
     border: none;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--color-border);
     margin: 2.5rem 0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    h1 {
-      color: #f9fafb;
-    }
-
-    .back-link {
-      color: #818cf8;
-    }
-
-    time {
-      color: #9ca3af;
-    }
-
-    .description {
-      color: #9ca3af;
-    }
-
-    .prose {
-      color: #d1d5db;
-    }
-
-    .prose :global(h2),
-    .prose :global(h3) {
-      color: #f9fafb;
-    }
-
-    .prose :global(a) {
-      color: #818cf8;
-    }
-
-    .prose :global(code) {
-      background: #1e293b;
-      color: #e2e8f0;
-    }
-
-    .prose :global(hr) {
-      border-color: #374151;
-    }
   }
 </style>
