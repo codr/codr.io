@@ -1,7 +1,7 @@
 {
   "name": "codr.io",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,6 +9,8 @@
     "astro": "astro",
     "lint": "oxlint -f default",
     "lint:fix": "oxlint --fix -f default",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -18,9 +20,6 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug"
   },
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "dependencies": {
     "astro": "^7.1.6"
   },
@@ -29,8 +28,12 @@
     "@testing-library/dom": "^10.4.0",
     "@vitest/coverage-v8": "^4.1.10",
     "happy-dom": "^20.0.11",
+    "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

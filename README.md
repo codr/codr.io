@@ -47,19 +47,19 @@ npm run preview
 
 ### Testing
 
-- **Unit tests:**  
+- **Unit tests:**
   ```sh
   npm test
   ```
-- **Watch mode:**  
+- **Watch mode:**
   ```sh
   npm run test:watch
   ```
-- **Test coverage:**  
+- **Test coverage:**
   ```sh
   npm run test:coverage
   ```
-- **End-to-end tests:**  
+- **End-to-end tests:**
   ```sh
   npm run test:e2e
   ```

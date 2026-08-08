@@ -1,13 +1,9 @@
 {
-  "cSpell.words": [
-    "Elgato",
-    "fswebcam",
-    "oxlint",
-    "timelapse",
-    "withastro"
-  ],
+  "cSpell.words": ["Elgato", "fswebcam", "oxfmt", "oxlint", "timelapse", "withastro"],
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
   },
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
   "eslint.enable": false
 }
