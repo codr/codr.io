@@ -28,8 +28,6 @@ npx vitest run src/components/Header.test.ts
 
 This is a personal portfolio site built with **Astro 5** and **Tailwind CSS 4** (via Vite plugin, not PostCSS). Deployed automatically to GitHub Pages on push to `main` — CI runs lint, format-check, and unit tests before build.
 
-**Styling approach:** Tailwind utility classes and component-scoped `<style>` blocks coexist throughout `.astro` files. Dark mode uses `@media (prefers-color-scheme: dark)`.
-
 **Linting:** [oxlint](https://oxc.rs) lints `.ts`/`.js`/`.mjs` files and the frontmatter script of `.astro` files (config in `.oxlintrc.json`). It does not lint Astro templates themselves. Run `npm run lint`.
 
 **Formatting:** [oxfmt](https://oxc.rs) formats JS/TS/JSON/YAML/Markdown/CSS files (config in `.oxfmtrc.json`, `singleQuote: true` to match the codebase). Like oxlint, it does not yet support `.astro` files — those are left to the `astro-build.astro-vscode` extension in-editor. Run `npm run format` (writes) or `npm run format:check` (CI).
