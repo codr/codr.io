@@ -1,0 +1,201 @@
+---
+---
+
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  type="button"
+  aria-label="Switch to dark theme"
+  transition:persist
+>
+  <svg
+    class="icon icon-sun"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path
+      d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+    ></path>
+  </svg>
+  <svg
+    class="icon icon-moon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-text);
+    border-color: var(--color-accent-soft-border);
+    background: var(--color-accent-soft);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .icon-moon {
+    display: none;
+  }
+
+  /* Explicit dark theme: show the moon, hide the sun. */
+  :global(html[data-theme='dark']) .icon-sun {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .icon-moon {
+    display: inline-block;
+  }
+
+  /* No explicit choice yet: fall back to system preference. */
+  @media (prefers-color-scheme: dark) {
+    :global(html:not([data-theme])) .icon-sun {
+      display: none;
+    }
+
+    :global(html:not([data-theme])) .icon-moon {
+      display: inline-block;
+    }
+  }
+</style>
+
+<script>
+  function currentTheme(root: HTMLElement): 'light' | 'dark' {
+    if (root.dataset.theme === 'dark' || root.dataset.theme === 'light') {
+      return root.dataset.theme;
+    }
+    return matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+
+  function applyTheme(root: HTMLElement, theme: 'light' | 'dark') {
+    root.dataset.theme = theme;
+  }
+
+  function updateLabel(button: HTMLElement, root: HTMLElement) {
+    button.setAttribute(
+      'aria-label',
+      currentTheme(root) === 'dark'
+        ? 'Switch to light theme'
+        : 'Switch to dark theme',
+    );
+  }
+
+  // `transition:persist` on the button (see markup above) keeps this exact
+  // DOM node — and everything wired up below — across every client-side
+  // navigation, so this only needs to run once, ever, rather than being
+  // re-run per page via `astro:page-load`.
+  const root = document.documentElement;
+  const button = document.getElementById('theme-toggle');
+
+  if (button) {
+    updateLabel(button, root);
+
+    button.addEventListener('click', () => {
+      const next = currentTheme(root) === 'dark' ? 'light' : 'dark';
+      const reduceMotion = matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+
+      button.setAttribute(
+        'aria-label',
+        next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
+      );
+
+      if (
+        reduceMotion ||
+        typeof document.startViewTransition !== 'function'
+      ) {
+        applyTheme(root, next);
+        return;
+      }
+
+      // Always originate from the button's own center rather than the
+      // click/pointer position: keyboard activation (Enter/Space), screen
+      // readers, and programmatic .click() calls all fire a click event
+      // with clientX/clientY hardcoded to 0 — there's no real cursor
+      // position to read in those cases. Using the button itself keeps the
+      // origin correct and consistent for every activation method.
+      const rect = button.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const radius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
+      );
+
+      // Workaround: on some HiDPI (Retina) displays, the browser appears to
+      // map ::view-transition-new(root)'s clip-path coordinates against the
+      // snapshot's device-pixel backing store rather than the CSS layout
+      // viewport, which halves the effective x/y on a devicePixelRatio-2
+      // screen. These are already CSS px and shouldn't need this, so this
+      // is a documented compensation for that observed behavior, not a
+      // general unit conversion — it's a no-op at devicePixelRatio 1.
+      // TODO: revisit once the underlying browser behavior is confirmed
+      // (see the theme toggle conversation for the diagnostic details).
+      const dpr = window.devicePixelRatio || 1;
+      root.style.setProperty('--vt-x', `${x * dpr}px`);
+      root.style.setProperty('--vt-y', `${y * dpr}px`);
+      root.style.setProperty('--vt-r', `${radius * dpr}px`);
+      root.classList.add('vt-theme');
+
+      const transition = document.startViewTransition(() =>
+        applyTheme(root, next),
+      );
+      transition.finished.finally(() => root.classList.remove('vt-theme'));
+    });
+  }
+
+  // Astro's router resets <html>'s attributes to match the incoming page's
+  // server-rendered markup on every navigation — which never includes
+  // data-theme, since it's only ever set here at runtime. Carry an
+  // explicit choice forward by stamping it onto the incoming document
+  // before the swap applies. This is Astro's documented pattern for
+  // persisting theme state across view transitions.
+  document.addEventListener('astro:before-swap', (event) => {
+    const theme = root.dataset.theme;
+    if (theme) {
+      event.newDocument.documentElement.dataset.theme = theme;
+    }
+  });
+</script>

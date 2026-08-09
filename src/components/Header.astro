@@ -1,5 +1,6 @@
 ---
 import { FEATURES } from '@/config/features';
+import ThemeToggle from '@/components/ThemeToggle.astro';
 
 const { pathname } = Astro.url;
 ---
@@ -13,36 +14,39 @@ const { pathname } = Astro.url;
         >
       </a>
     </div>
-    <nav class="nav">
-      <ul>
-        <li>
-          <a href="/" aria-current={pathname === '/' ? 'page' : undefined}
-            >Home</a
-          >
-        </li>
-        {
-          FEATURES.SHOW_HEADER_LINKS && (
-            <li>
-              <a
-                href="/projects"
-                aria-current={
-                  pathname.startsWith('/projects') ? 'page' : undefined
-                }
-              >
-                Projects
-              </a>
-            </li>
-          )
-        }
-        <li>
-          <a
-            href="/blog"
-            aria-current={pathname.startsWith('/blog') ? 'page' : undefined}
-            >Blog</a
-          >
-        </li>
-      </ul>
-    </nav>
+    <div class="header-actions">
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="/" aria-current={pathname === '/' ? 'page' : undefined}
+              >Home</a
+            >
+          </li>
+          {
+            FEATURES.SHOW_HEADER_LINKS && (
+              <li>
+                <a
+                  href="/projects"
+                  aria-current={
+                    pathname.startsWith('/projects') ? 'page' : undefined
+                  }
+                >
+                  Projects
+                </a>
+              </li>
+            )
+          }
+          <li>
+            <a
+              href="/blog"
+              aria-current={pathname.startsWith('/blog') ? 'page' : undefined}
+              >Blog</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
@@ -86,6 +90,12 @@ const { pathname } = Astro.url;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .nav ul {
