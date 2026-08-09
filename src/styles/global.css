@@ -79,6 +79,28 @@
 }
 
 /*
+ * Suppress the browser's default whole-page crossfade on plain page
+ * navigation, so it doesn't compete with the #main-content slide below.
+ * This intentionally is NOT done via Astro's `transition:animate="none"`
+ * on <html> — that directive makes Astro assign the element its own
+ * generated view-transition-name, which overwrites the browser's implicit
+ * `view-transition-name: root` that the theme toggle's circle-wipe (just
+ * below) depends on. Targeting `root` directly here leaves that name
+ * alone; the `.vt-theme`-scoped rules below still win during an actual
+ * theme toggle, since a class selector is more specific than this bare
+ * pseudo-element selector.
+ */
+@media not (prefers-reduced-motion: reduce) {
+  @supports (view-transition-name: root) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+  }
+}
+
+/*
  * Circle-wipe reveal for explicit theme toggles, scoped to the `vt-theme`
  * class the toggle applies only for the duration of its own transition —
  * this keeps it from hijacking Astro's page-navigation transitions, which
@@ -102,6 +124,93 @@
       }
       to {
         clip-path: circle(var(--vt-r, 150%) at var(--vt-x, 50%) var(--vt-y, 50%));
+      }
+    }
+  }
+}
+
+/*
+ * Horizontal slide for page navigation, scoped to the #main-content
+ * transition (see Layout.astro) rather than root, so it doesn't collide
+ * with the theme toggle's circle-wipe above. Direction is driven by
+ * [data-transition-direction] on <html>, set just before each navigation
+ * starts (see the script in Layout.astro's <head>).
+ *
+ * `transition:animate="none"` on <main> (see Layout.astro) stops Astro
+ * injecting its own default fade — but its "none" preset also sets
+ * `opacity: 0` on the outgoing snapshot as part of that (its definition of
+ * a bare cut, not "no animation but still visible"), scoped inside
+ * `@layer astro`. Unlayered rules always win over layered ones, so the
+ * explicit `opacity: 1` below is enough to override it and make the
+ * outgoing page visible again for its own slide-out.
+ *
+ * Every rule below also requires [data-astro-transition] on <root> — an
+ * attribute Astro's router itself sets for the duration of a page
+ * navigation only (documented for exactly this kind of custom-animation
+ * scoping). <main>'s view-transition-name makes it a participant in *any*
+ * view transition on the document, not just page navigation — including
+ * the theme toggle's own separate document.startViewTransition() call —
+ * so without this guard, main-content would also slide (using whatever
+ * [data-transition-direction] happened to be left over from the last
+ * navigation) every time the theme is toggled.
+ *
+ * `animation-fill-mode: both` matters here too: Astro's own rule for these
+ * pseudo-elements is the shorthand `animation: none`, which resets every
+ * animation sub-property to its initial value, including fill-mode ->
+ * "none". Left at that, each slide snaps back to its un-animated position
+ * the instant it finishes (rather than holding the keyframe's end state)
+ * — since that can happen slightly before the browser tears down the
+ * whole transition, the outgoing page would flash back into view for a
+ * frame right at the end of the swipe.
+ */
+@media not (prefers-reduced-motion: reduce) {
+  @supports (view-transition-name: main-content) {
+    ::view-transition-old(main-content),
+    ::view-transition-new(main-content) {
+      animation-duration: 0.32s;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      animation-fill-mode: both;
+      mix-blend-mode: normal;
+      opacity: 1;
+    }
+
+    :root[data-astro-transition][data-transition-direction='forward']::view-transition-old(main-content) {
+      animation-name: slide-out-left;
+    }
+
+    :root[data-astro-transition][data-transition-direction='forward']::view-transition-new(main-content) {
+      animation-name: slide-in-right;
+    }
+
+    :root[data-astro-transition][data-transition-direction='back']::view-transition-old(main-content) {
+      animation-name: slide-out-right;
+    }
+
+    :root[data-astro-transition][data-transition-direction='back']::view-transition-new(main-content) {
+      animation-name: slide-in-left;
+    }
+
+    @keyframes slide-out-left {
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes slide-in-right {
+      from {
+        transform: translateX(100%);
+      }
+    }
+
+    @keyframes slide-out-right {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
+    @keyframes slide-in-left {
+      from {
+        transform: translateX(-100%);
       }
     }
   }

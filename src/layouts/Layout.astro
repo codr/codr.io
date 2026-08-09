@@ -37,10 +37,61 @@ const pageTitle = title ? `${title} — codr.io` : 'codr.io';
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <ClientRouter />
+
+    <script>
+      // Stamp the browsing direction onto <html> so the #main-content
+      // slide animation in global.css knows which way to go. This is based
+      // on how "deep" each route is — Home (/) is depth 0, a section index
+      // like /blog is depth 1, a page within it like /blog/my-thing is
+      // depth 2, and so on — not on whether the browser's back/forward
+      // buttons were used. Going deeper is "forward" (slide left), coming
+      // back up is "back" (slide right), regardless of whether that
+      // happened via a link click or an actual back-button press: /blog ->
+      // /blog/my-thing slides left, /blog/my-thing -> /blog slides right,
+      // and clicking "Home" from a post slides back toward home too.
+      //
+      // Landing on the *same* route (e.g. clicking the logo while already
+      // on "/") is tagged "same" rather than "forward"/"back" — Astro still
+      // runs a transition for it (it only skips that for same-page
+      // hash-only navigation), but global.css's slide rules only match
+      // "forward"/"back", so "same" naturally falls through to no
+      // animation instead of replaying a pointless slide.
+      //
+      // Has to be set in *two* places: `astro:before-preparation`, before
+      // the browser snapshots the outgoing page (so ::view-transition-old
+      // sees it), and again in `astro:before-swap` on `event.newDocument`
+      // (so it survives Astro morphing the live <html>'s attributes to
+      // match the incoming server-rendered page — which has no such
+      // attribute — before the incoming page gets its own snapshot). This
+      // mirrors why the theme toggle re-stamps `data-theme` in
+      // `astro:before-swap`.
+      function routeDepth(pathname: string): number {
+        return pathname.split('/').filter(Boolean).length;
+      }
+
+      function directionFor(from: URL, to: URL): 'forward' | 'back' | 'same' {
+        if (from.pathname === to.pathname) return 'same';
+        return routeDepth(to.pathname) < routeDepth(from.pathname)
+          ? 'back'
+          : 'forward';
+      }
+
+      document.addEventListener('astro:before-preparation', (event) => {
+        document.documentElement.dataset.transitionDirection = directionFor(
+          event.from,
+          event.to,
+        );
+      });
+
+      document.addEventListener('astro:before-swap', (event) => {
+        event.newDocument.documentElement.dataset.transitionDirection =
+          directionFor(event.from, event.to);
+      });
+    </script>
   </head>
   <body>
     <Header />
-    <main>
+    <main transition:name="main-content" transition:animate="none">
       <slot />
     </main>
     <Footer />
