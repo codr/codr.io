@@ -108,6 +108,22 @@
  */
 @media not (prefers-reduced-motion: reduce) {
   @supports (view-transition-name: root) {
+    /*
+     * <main>'s own view-transition-name (see #main-content rules below)
+     * excludes it from root's snapshot in *any* transition, not just page
+     * navigation — including this one. Left alone, main would instantly
+     * snap to the new theme's colors (its own transition has no
+     * animation, by design, for page nav) while only the header/footer/
+     * background around it did the circle-wipe, since those are still
+     * part of root. Dropping main's name for the toggle's own transition
+     * folds it back into root's single snapshot, so the wipe sweeps across
+     * the whole page as one piece, like it did before main had a name of
+     * its own.
+     */
+    html.vt-theme main {
+      view-transition-name: none;
+    }
+
     html.vt-theme::view-transition-old(root) {
       animation: none;
       mix-blend-mode: normal;
