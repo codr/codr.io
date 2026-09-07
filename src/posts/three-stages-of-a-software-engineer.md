@@ -1,6 +1,6 @@
 ---
 title: Three Stages of a Software Engineer
-date: 2026-09-07
+date: 2026-03-07
 description: Most engineers learn to make it run. Many master production. Fewer still write for the future.
 ---
 
@@ -30,7 +30,7 @@ But there's a third stage.
 
 Stage 3 engineers think about the people who will read, change, and extend this code long after they're gone. Maybe that's a teammate. Maybe it's a stranger. Maybe it's themselves.
 
-This is where the canon starts to matter. Books like Robert C. Martin's _Clean Code_, Martin Fowler's _Refactoring_, and the timeless _The Pragmatic Programmer_ by Hunt and Thomas stop being things you mean to read and become things you feel the urgency of. You've been the person who inherited someone's clever, undocumented mess at 2am. You refuse to be the person who leaves it.
+This is where the canon starts to matter. Books like Robert C. Martin's [_Clean Code_][clean-code], Martin Fowler's [_Refactoring_][refactoring], and the timeless [_The Pragmatic Programmer_][pragprog] by Hunt and Thomas stop being things you mean to read and become things you feel the urgency of. You've been the person who inherited someone's clever, undocumented mess at 2am. You refuse to be the person who leaves it.
 
 Writing code is easy. Writing code that someone else can confidently change two years from now? That's craft.
 
@@ -47,13 +47,6 @@ In a way, it mirrors a pattern you see in any long personal growth arc: early st
 The good news: stage 3 is learnable. It doesn't require genius. It requires deliberate practice, a willingness to be humbled by your own past code, and the discipline to slow down just enough to make it legible.
 
 Your future colleague, the one who inherits your work at 11pm on a Wednesday, is counting on you.
-
-## Further reading
-
-- **[Clean Code][clean-code]** — Robert C. Martin. The definitive argument for writing code as a craft. Opinionated, occasionally controversial, always useful.
-- **[Refactoring: Improving the Design of Existing Code][refactoring]** — Martin Fowler. The practical manual for making messy code legible without breaking it. A must for anyone who's inherited a codebase.
-- **[The Pragmatic Programmer][pragprog]** — Andrew Hunt & David Thomas. Timeless principles for engineers who want to think about their work, not just execute it.
-- **[A Philosophy of Software Design][aposd]** — John Ousterhout. A sharp, contrarian counterpoint to _Clean Code_. Essential reading once you're ready to question the canon.
 
 [clean-code]: https://www.oreilly.com/library/view/clean-code-a/9780136083238/
 [refactoring]: https://martinfowler.com/books/refactoring.html
