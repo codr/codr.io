@@ -14,6 +14,6 @@ describe('Welcome', () => {
     const result = await container.renderToString(Welcome);
 
     expect(result).toContain("Hi, I'm Cody");
-    expect(result).toContain('software engineer');
+    expect(result).toContain('Software Engineer');
   });
 });
