@@ -119,6 +119,18 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
     margin: 0.5rem 0;
   }
 
+  .prose :global(blockquote) {
+    margin: 1.75rem 0;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--color-pre-text);
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  .prose :global(blockquote p) {
+    margin: 0.5rem 0;
+  }
+
   .prose :global(a) {
     color: var(--color-accent);
     text-decoration: underline;
