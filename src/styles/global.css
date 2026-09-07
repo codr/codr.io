@@ -178,6 +178,15 @@
  * — since that can happen slightly before the browser tears down the
  * whole transition, the outgoing page would flash back into view for a
  * frame right at the end of the swipe.
+ *
+ * Each keyframe below fades to/from opacity 0 alongside its translateX, not
+ * just slides. <main>'s snapshot is clipped to its own box (capped at
+ * max-width: 1200px in Layout.astro), so on a wide viewport that box sits
+ * well short of the screen edges — a pure slide pops out of existence right
+ * at that inner boundary, in plain view, rather than reading as "left the
+ * screen". Fading out over the same duration (starting from the `opacity:
+ * 1` above) means it's already invisible by the time it reaches that edge,
+ * so the clip never shows.
  */
 @media not (prefers-reduced-motion: reduce) {
   @supports (view-transition-name: main-content) {
@@ -209,24 +218,28 @@
     @keyframes slide-out-left {
       to {
         transform: translateX(-100%);
+        opacity: 0;
       }
     }
 
     @keyframes slide-in-right {
       from {
         transform: translateX(100%);
+        opacity: 0;
       }
     }
 
     @keyframes slide-out-right {
       to {
         transform: translateX(100%);
+        opacity: 0;
       }
     }
 
     @keyframes slide-in-left {
       from {
         transform: translateX(-100%);
+        opacity: 0;
       }
     }
   }
